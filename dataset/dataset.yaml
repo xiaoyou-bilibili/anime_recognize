@@ -1,0 +1,9 @@
+# 数据集地址设置
+path: data/detection  # 数据集根路径(人脸检测)
+train: train  # 训练数据地址
+val: val  # 验证数据集
+test: test # 测试数据集
+
+# 总的分类数
+nc: 1  # 类别数，目前只有一个类别就是人脸
+names: [ 'face' ]  # 类别名称
