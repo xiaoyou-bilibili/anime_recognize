@@ -1,5 +1,5 @@
 # 数据集地址设置
-path: data/detection  # 数据集根路径(人脸检测)
+path: ../data/detection  # 数据集根路径(人脸检测)
 train: train  # 训练数据地址
 val: val  # 验证数据集
 test: test # 测试数据集
