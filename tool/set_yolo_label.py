@@ -1,46 +1,11 @@
 # 计算每张图片的标签
 from cv2 import cv2
-import os
-
-
-# 这一块是显示yolo的标签
-def show_yolo_img(filename, point):
-    point = str(point).split(" ")
-    # 对应的文件路径
-    img = cv2.imread(filename)
-    # 把框画出来
-    height = img.shape[0]
-    width = img.shape[1]
-    print(height, width)
-    # 计算左上和右下角的坐标
-    x1 = int((float(point[1]) - float(point[3]) / 2) * width)
-    y1 = int((float(point[2]) - float(point[4]) / 2) * height)
-    x2 = int((float(point[1]) + float(point[3]) / 2) * width)
-    y2 = int((float(point[2]) + float(point[4]) / 2) * height)
-    cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
-    cv2.imshow("a", img)
-    cv2.waitKey(-1)
-
-
-# 显示标注图片的链接
-def show_label():
-    path = "../data/detection/val/labels/"
-    # 显示文件夹下所有图片
-    files = os.listdir(path)
-    # 读取文件
-    for file in files:
-        with open(path + file) as f:
-            filename = path + "../images/" + file[:-4] + ".jpg"
-            for point in f.readlines():
-                show_yolo_img(filename, point)
-    # print(files)
-
 
 # 所有的检测图片路径
 detection_path = "../data/detection"
 
 
-# 这一块是开始计算标签
+# 开始计算标签
 def calculate_label(data_type):
     # 首先我们读取标签
     with open("%s/%s.txt" % (detection_path, data_type)) as f:
@@ -67,7 +32,7 @@ def calculate_label(data_type):
                 # 写入文件
                 with open(label_name, "a") as f2:
                     f2.write(" ".join(point) + "\n")
-        print("遍历完成")
+        print("%s遍历完成" % data_type)
 
 
 if __name__ == '__main__':
@@ -75,4 +40,3 @@ if __name__ == '__main__':
     calculate_label("train")
     calculate_label("test")
     calculate_label("val")
-    # show_label()

@@ -1,2 +1,4 @@
 .idea
 yolov5
+*.pth
+*.pt
