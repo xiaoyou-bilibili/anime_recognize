@@ -13,6 +13,10 @@
         .layui-field-box img{
             max-width: 100%;
         }
+        .layui-table-cell{
+            height: 100px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -27,20 +31,18 @@
                   <i class="layui-icon">&#xe67c;</i>上传图片
                 </button>
                 <div style="display: flex;margin-top: 30px">
-                    <fieldset class="layui-elem-field">
-                      <legend>原始图片</legend>
-                      <div class="layui-field-box">
-                        <img id="detect_row"  alt="" src="">
-                      </div>
-                    </fieldset>
                     <fieldset class="layui-elem-field" style="margin-left: 30px">
                       <legend>识别结果</legend>
                       <div class="layui-field-box">
                         <img id="detect_res"  alt="" src="">
                       </div>
                     </fieldset>
+                    <fieldset class="layui-elem-field">
+                      <legend>检测信息</legend>
+                       <table id="detect" lay-filter="test"></table>
+                    </fieldset>
                 </div>
-                 <table id="detect" lay-filter="test"></table>
+
             </div>
             <div class="layui-tab-item">
             </div>
@@ -75,24 +77,13 @@ layui.use('upload', function(){
         close()
         // 修改一下图片，这里我们设置一个随机数，目的是为了刷新图片
         document.getElementById("detect_res").src = res.detect + "?t=" + Math.random()
-        document.getElementById("detect_row").src = res.row + "?t=" + Math.random()
         // 表格渲染数据
-        table.render({elem: '#detect',page: true,width: 555,data: res.box,cols: [[{field: 'label', title: '对象', width: 150}, {field: 'point', title: '坐标', width: 300}, {field: 'conf', title: '置信度', sort: true, width: 100}]]});
-    }
-  });
-  // 视频检测接口
-  upload.render({
-    elem: '#video',
-    url: '/yolov5/detect_video', //上传接口
-    accept: 'file',
-    before: function (){
-       load()
-    },
-    done: function(res){
-          close()
-          // 修改一下图片，这里我们设置一个随机数，目的是为了刷新图片
-          document.getElementById("video_detect_res").src = res.detect + "?t=" + Math.random()
-          document.getElementById("video_detect_row").src = res.row + "?t=" + Math.random()
+        table.render({elem: '#detect',page: true,width: 700,data: res.face_info,cols: [[
+                {field: 'img', title: '图片', width: 200,templet: function(d){return '<img src="data:image/jepg;base64,'+d.img+'" />'}},
+                {field: 'name', title: '名字', width: 150},
+                {field: 'point', title: '坐标', width: 200},
+                {field: 'score', title: '得分', sort: true, width: 100}
+        ]]});
     }
   });
 });
