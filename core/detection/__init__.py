@@ -11,13 +11,3 @@ def detect_img(img):
     # 获取我们的坐标信息并返回
     points = results.xyxy[0].cpu().numpy()
     return points
-
-
-# 检测图片并保存
-def detect_img_with_save(img, filename):
-    # 调用模型进行检测获取结果
-    results = model(img)
-    results.save(filename)
-    # 获取我们的坐标信息并返回
-    points = results.xyxy[0].cpu().numpy()
-    return points

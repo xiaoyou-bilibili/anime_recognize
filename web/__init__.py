@@ -3,7 +3,7 @@ from flask import Flask, request, Response, render_template
 from flask_cors import CORS
 import json
 import numpy as np
-from core.detection import detect_img, detect_img_with_save
+from core.detection import detect_img
 from core.recognize import get_feature
 from core.es import feature_search, store_feature
 from core.tool import cv2ImgAddText, cv_to_base64, base64_to_cv
@@ -56,9 +56,9 @@ def recognize_image():
             # 获取坐标信息
             x1, y1, x2, y2 = int(point[0]), int(point[1]), int(point[2]), int(point[3])
             # 显示中文信息
-            img = cv2ImgAddText(img, face["name"], x1, y1, (245, 108, 108), 40)
+            img = cv2ImgAddText(img, face["name"], x1, y1-32, (255, 0, 0), 30)
             # 显示框信息
-            cv2.rectangle(img, (x1, y1), (x2, y2), (64, 158, 255), 4)
+            cv2.rectangle(img, (x1, y1), (x2, y2), (255, 158, 64), 4)
     # 保存我们绘制的结果
     cv2.imwrite("./web/static/recognize_res.jpg", img)
     # 返回json类型字符串
