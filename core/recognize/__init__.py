@@ -29,3 +29,4 @@ def get_feature(img):
             return features[0]
         else:
             return []
+
