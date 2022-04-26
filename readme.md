@@ -2,6 +2,9 @@
 
 > 欢迎关注B站：https://space.bilibili.com/343147393
 
+## 视频介绍
+B站：https://www.bilibili.com/video/BV1tS4y1Y7gc
+
 ## 效果展示
 ### 人脸录入
 ![](.readme_images/bd6a9953.png)
